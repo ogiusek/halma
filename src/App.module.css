@@ -1,0 +1,17 @@
+.background {
+    transition: 1s;
+    display: flex;
+    justify-content: center;
+}
+
+.box {
+    width: calc(100vw - 2px);
+    height: calc(100vw - 2px);
+}
+
+@media all and (min-width: 90vh) {
+    .box {
+        height: 100vh;
+        width: 90vh;
+    }
+}
