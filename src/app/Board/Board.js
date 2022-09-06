@@ -2,32 +2,32 @@ import React, { useContext, useState } from "react";
 import style from "./Board.module.css";
 import Tile from "./tile/Tile";
 
-import AuthContext from "../../backend/colorApi";
+import AuthContext from "../../backend/AuthContext";
 import GetMoves from "../../backend/getMoves";
 import move from "../../backend/move";
-import board from "../../backend/objects/board";
+import { SaveMove } from "../../backend/movesHistory";
 
-function Board() {
+function Board(props) {
     const ctx = useContext(AuthContext);
     const [selected, setSelected] = useState({ x: -1, y: -1 });
-
     const select = (value) => {
         setSelected(value);
     }
-
     const moveFront = (x, y) => {
-        move(selected, { x: x, y: y });
-        setTimeout(() => {
-            setSelected({ x: -1, y: -1 });
-        }, 1);
-        ctx.refresh();
+        ctx.setBoard(move(props.board, selected, { x: x, y: y }));
+        SaveMove('board', { from: selected, to: { x: x, y: y } });
+        let color = ctx.color + 1;
+        if (color >= ctx.order.length) {
+            color = 0;
+        }
+        ctx.setColor(color);
+        setSelected({ x: -1, y: -1 });
     }
-
-    const shadowBlocks = GetMoves(board, selected.x, selected.y);
+    const shadowBlocks = GetMoves(props.board, selected.x, selected.y);
     return (
         <div className={style.board}>
             {
-                board.map((elements, index) => {
+                props.board.map((elements, index) => {
                     return (<div className={style.column} key={index}>
                         {elements.map((element, indey) => {
                             let selectedToTile;

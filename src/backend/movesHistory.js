@@ -1,28 +1,24 @@
+import { CreateNewBoard, SetBoard } from "./objects/board";
+
 let history = {};
 function SaveMove(id, move) {
     if (history[id] == undefined) {
         history[id] = [];
     }
-    history[id].push([]);
-    move.map((x, xIndex) => {
-        history[id][history[id].length - 1].push([]);
-        move[xIndex].map((y) => {
-            history[id][history[id].length - 1][xIndex].push(y);
-        });
-    });
-    console.log(history);
+    history[id].push({ ...move });
+    // console.log(history[id]);
 }
 
 function GetLastMove(id) {
-    return history[id]
+    if (history[id] != undefined && history[id].length > 0) {
+        return history[id].pop();
+    } else {
+        return null;
+    }
 }
 
 function Reset(id) {
-
+    history[id] = [];
 }
 
-function Back(id) {
-
-}
-
-export { SaveMove, GetLastMove };
+export { SaveMove, GetLastMove, Reset };

@@ -1,11 +1,11 @@
-import board from "./objects/board";
 import pawn from "./objects/pawn.enum";
-import { ChangeColor } from "./colorTurn";
+import { SaveMove } from "./movesHistory";
 
-function move(from, to) {
-    ChangeColor();
+
+function move(board, from, to) {
     board[to.x][to.y].content = board[from.x][from.y].content;
     board[from.x][from.y].content = pawn.empty;
+    return board;
 }
 
 export default move;

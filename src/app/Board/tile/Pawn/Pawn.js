@@ -8,6 +8,7 @@ function Pawn(props) {
     for (let index = 0; index < color.length; index++) {
         if (color[index][1] == props.content) {
             color = color[index][0];
+            break;
         }
     }
 

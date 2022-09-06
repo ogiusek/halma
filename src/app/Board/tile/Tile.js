@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import style from "./Tile.module.css";
 import Pawn from "./Pawn/Pawn";
 
-
 import pawn from "../../../backend/objects/pawn.enum";
-import colorTurn from "../../../backend/colorTurn";
+import AuthContext from "../../../backend/AuthContext";
 
 function Tile(props) {
+    const ctx = useContext(AuthContext);
     const select = () => {
-        if (props.content == colorTurn()) {
+        if (props.content == ctx.order[ctx.color]) {
             props.select({ x: props.xPos, y: props.yPos });
         }
     }

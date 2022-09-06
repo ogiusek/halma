@@ -1,39 +1,45 @@
 import React, { useState } from 'react';
 import style from './App.module.css';
-import AuthContext from './backend/colorApi';
-
 import UI from './app/UI/UI';
 import Board from './app/Board/Board';
+
+import AuthContext from './backend/AuthContext';
 import pawn from './backend/objects/pawn.enum';
-import colorTurn from './backend/colorTurn';
+import { order as orginalOrder } from './backend/colorTurn';
+import firstBoard from './backend/objects/board';
 
 function App() {
-  const [refresher, setRefresh] = useState(0);
-  const refresh = () => {
-    setRefresh(refresher + 1);
+  const [order, setOrder] = useState(orginalOrder);
+  const [board, setBoard] = useState(firstBoard);
+  const [color, setColor] = useState(0);
+
+  const GetColor = (colorTurn) => {
+    let color = Object.entries(pawn);
+    for (let index = 0; index < order.length; index++) {
+      if (index == colorTurn) {
+        return color[order[index]][0];
+      }
+    }
+    return 'black';
   }
+
   return (
-    <div className={style.background} style={{ backgroundColor: GetColor() }}>
+    <div className={style.background} style={{ backgroundColor: GetColor(color) }}>
       <AuthContext.Provider value={{
-        refresh: refresh
+        board: board,
+        setBoard: setBoard,
+        color: color,
+        setColor: setColor,
+        order: order,
+        setOrder: setOrder
       }}>
         <div className={style.box}>
-          <Board />
-          <UI />
+          <Board board={board} />
+          <UI board={board} setboard={setBoard} />
         </div>
       </AuthContext.Provider>
     </div >
   );
-}
-
-function GetColor() {
-  let color = Object.entries(pawn);
-  for (let index = 0; index < color.length; index++) {
-    if (color[index][1] == colorTurn()) {
-      color = color[index][0];
-    }
-  }
-  return color
 }
 
 export default App;

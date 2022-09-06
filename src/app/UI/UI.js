@@ -1,22 +1,28 @@
 import React, { useContext } from "react";
 import style from "./UI.module.css";
 
-import AuthContext from "../../backend/colorApi";
-import { GetLastMove } from "../../backend/movesHistory";
+import AuthContext from "../../backend/AuthContext";
+import { GetLastMove, Reset } from "../../backend/movesHistory";
+import move from "../../backend/move";
+import { CreateNewBoard } from "../../backend/objects/board";
 
 function UI(props) {
     const ctx = useContext(AuthContext);
     const back = () => {
-
-        ctx.refresh();
+        const lastBoard = GetLastMove('board');
+        if (lastBoard != null) {
+            ctx.setBoard(move(ctx.board, lastBoard.to, lastBoard.from));
+            ctx.setColor(ctx.color - 1 < 0 ? ctx.order.length - 1 : ctx.color - 1);
+        }
     }
     const reset = () => {
-
-        ctx.refresh();
+        Reset('board');
+        ctx.setBoard(CreateNewBoard());
+        ctx.setColor(0);
     }
     return (<div className={style.wraper}>
-        <button onClick={reset}>reset</button>
         <button onClick={back}>back</button>
+        <button onClick={reset}>reset</button>
     </div>);
 }
 
