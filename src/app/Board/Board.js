@@ -44,7 +44,7 @@ function Board(props) {
                                 <Tile xPos={element.x} yPos={element.y}
                                     selected={selectedToTile} select={select}
                                     move={moveFront}
-                                    content={element.content}
+                                    element={element}
                                     key={indey + ''} />
                             )
                         })}

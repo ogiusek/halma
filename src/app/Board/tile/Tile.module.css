@@ -5,9 +5,6 @@
 
 .selected {
     transition: 0.5s;
-    /* -webkit-box-shadow: inset 0px 0px 10px 0px rgba(255, 0, 0, 0.7); */
-    /* -moz-box-shadow: inset 0px 0px 10px 0px rgba(255, 0, 0, 0.7); */
-    /* box-shadow: inset 0px 0px 10px 0px rgba(255, 0, 0, 0.7); */
     -webkit-box-shadow: inset 0px 0px 15px 0px rgba(255, 0, 0, 0.7);
     -moz-box-shadow: inset 0px 0px 15px 0px rgba(255, 0, 0, 0.7);
     box-shadow: inset 0px 0px 15px 0px rgba(255, 0, 0, 0.7);
@@ -15,9 +12,6 @@
 
 .shadow {
     transition: 0.5s;
-    /* -webkit-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 1); */
-    /* -moz-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 1); */
-    /* box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 1); */
     -webkit-box-shadow: inset 0px 0px 15px 0px rgba(0, 0, 0, 1);
     -moz-box-shadow: inset 0px 0px 15px 0px rgba(0, 0, 0, 1);
     box-shadow: inset 0px 0px 15px 0px rgba(0, 0, 0, 1);
@@ -26,24 +20,3 @@
 .liteWraper {
     background-color: lightblue;
 }
-
-
-
-/* @media all and (min-width:80vh) {
-    .wraper {
-        width: calc((80vh / 16) - 2px);
-        height: calc((80vh / 16) - 2px);
-    }
-
-    .selected {
-        -webkit-box-shadow: inset 0px 0px calc((100% / 16 - 2px) / 8) 0px rgba(255, 0, 0, 0.7);
-        -moz-box-shadow: inset 0px 0px calc((100% / 16 - 2px) / 8) 0px rgba(255, 0, 0, 0.7);
-        box-shadow: inset 0px 0px calc((100% / 16 - 2px) / 8) 0px rgba(255, 0, 0, 0.7);
-    }
-
-    .shadow {
-        -webkit-box-shadow: inset 0px 0px calc((100% / 16 - 2px) / 8) 0px rgba(0, 0, 0, 1);
-        -moz-box-shadow: inset 0px 0px calc((100% / 16 - 2px) / 8) 0px rgba(0, 0, 0, 1);
-        box-shadow: inset 0px 0px calc((100% / 16 - 2px) / 8) 0px rgba(0, 0, 0, 1);
-    }
-} */
