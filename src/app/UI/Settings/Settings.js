@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import style from "./Settings.module.css";
 
-import pawn from "../../../backend/objects/pawn.enum";
 import enemys from "../../../backend/objects/enemy.enum";
 import Select from "./Select";
+import { GetAboutPlayers, ToOrder } from "./ColorsFilter/ColorsFilter";
 
 function Settings(props) {
-    // props.order
-    // props.setOrder
     const [players, setPlayers] = useState(2);
-    const [aboutPlayers, setAboutPlayers] = useState(getAboutPlayers(players));
+    const [aboutPlayers, setAboutPlayers] = useState(GetAboutPlayers(players));
     const setPlayersRef = (event) => {
-        setAboutPlayers(getAboutPlayers(event.target.value));
+        setAboutPlayers(GetAboutPlayers(event.target.value));
         setPlayers(event.target.value);
     }
     const selectRef = (event) => {
@@ -29,7 +27,9 @@ function Settings(props) {
 
     const confirmSettingsHandler = (event) => {
         event.preventDefault();
-
+        // console.log(aboutPlayers);
+        props.setOrder(ToOrder(aboutPlayers));
+        props.setShowSettings(false);
     }
 
     return (<form onSubmit={confirmSettingsHandler} className={style.main}>
@@ -46,15 +46,6 @@ function Settings(props) {
         </div>
         <button type="submit" className={style.button}>Play</button>
     </form >);
-}
-
-const getAboutPlayers = (players) => {
-    let aboutPlayers = [];
-    for (let index = 0; index < players; index++) {
-        aboutPlayers.push({ color: Object.entries(pawn)[index + 1][0], enemy: enemys.player });
-    }
-    // console.log(aboutPlayers);
-    return aboutPlayers;
 }
 
 export default Settings;

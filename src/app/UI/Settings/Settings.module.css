@@ -10,10 +10,11 @@
 
 .selects {
     width: 30%;
-    height: auto;
+    height: 30%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .inputs {
@@ -28,7 +29,7 @@
 }
 
 .select {
-    width: 30%;
+    width: 35%;
     height: auto;
     color: darkblue;
 }

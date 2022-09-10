@@ -1,3 +1,6 @@
+import pawn from "../../../../backend/objects/pawn.enum";
+import enemys from "../../../../backend/objects/enemy.enum";
+
 function FilterColors(colors, players, aboutPlayers, colorIndex) {
     let blockedColor;
     for (let index = 0; index < players; index++) {
@@ -25,6 +28,22 @@ function FilterColors(colors, players, aboutPlayers, colorIndex) {
     return colors;
 }
 
+const GetAboutPlayers = (players) => {
+    let aboutPlayers = [];
+    for (let index = 0; index < players; index++) {
+        aboutPlayers.push({ color: Object.entries(pawn)[index + 1][0], enemy: enemys.player });
+    }
+    return aboutPlayers;
+}
 
+const ToOrder = (aboutPlayers) => {
+    let newOrder = [];
 
-export { FilterColors };
+    aboutPlayers.map((color) => {
+        newOrder.push(pawn[color.color]);
+    });
+    console.log(newOrder);
+    return newOrder;
+}
+
+export { FilterColors, GetAboutPlayers, ToOrder };

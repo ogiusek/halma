@@ -13,7 +13,7 @@ function App() {
   const [order, setOrder] = useState(orginalOrder);
   const [board, setBoard] = useState(firstBoard);
   const [color, setColor] = useState(0);
-  const [showSetting, setShowSetting] = useState(true);
+  const [showSettings, setShowSettings] = useState(true);
 
   const GetColor = (colorTurn) => {
     let color = Object.entries(pawn);
@@ -35,10 +35,10 @@ function App() {
         order: order,
         setOrder: setOrder
       }}>
-        {showSetting && <Settings setShowSetting={setShowSetting} setOrder={setOrder} setEnemy />}
+        {showSettings && <Settings setShowSettings={setShowSettings} setOrder={setOrder} setEnemys />}
         <div className={style.box}>
           <Board board={board} />
-          <UI board={board} setboard={setBoard} />
+          <UI board={board} setboard={setBoard} setShowSettings={setShowSettings} />
         </div>
       </AuthContext.Provider>
     </div >

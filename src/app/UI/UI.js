@@ -19,6 +19,7 @@ function UI(props) {
         Reset('board');
         ctx.setBoard(CreateNewBoard());
         ctx.setColor(0);
+        props.setShowSettings(true);
     }
     return (<div className={style.wraper}>
         <button onClick={back}>back</button>
