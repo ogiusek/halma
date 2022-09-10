@@ -9,9 +9,9 @@
     height: calc(100vw - 2px);
 }
 
-@media all and (min-width: 90vh) {
+@media all and (min-width: 100vh) {
     .box {
         height: 100vh;
-        width: 90vh;
+        width: 100vh;
     }
 }

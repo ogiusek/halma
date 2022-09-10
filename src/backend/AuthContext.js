@@ -6,7 +6,8 @@ const AuthContext = React.createContext({
     setBoard: undefined,
     setColor: undefined,
     order: undefined,
-    setOrder: undefined
+    setOrder: undefined,
+    win: undefined
 });
 
 export default AuthContext;

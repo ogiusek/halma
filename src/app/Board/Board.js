@@ -6,6 +6,7 @@ import AuthContext from "../../backend/AuthContext";
 import GetMoves from "../../backend/getMoves";
 import move from "../../backend/move";
 import { SaveMove } from "../../backend/movesHistory";
+import pawn from "../../backend/objects/pawn.enum";
 
 function Board(props) {
     const ctx = useContext(AuthContext);
@@ -20,8 +21,29 @@ function Board(props) {
         if (color >= ctx.order.length) {
             color = 0;
         }
+        if (ctx.board[x][y].missing === ctx.board[x][y].content) {
+            if (checkWin(ctx.color)) {
+                ctx.win();
+            }
+        }
         ctx.setColor(color);
         setSelected({ x: -1, y: -1 });
+
+    }
+    const checkWin = (color) => {
+        for (let x = 0; x < ctx.board.length; x++) {
+            for (let y = 0; y < ctx.board[x].length; y++) {
+                if (ctx.board[x][y].missing === pawn.empty) {
+                    continue;
+                }
+                if (ctx.board[x][y].missing === color) {
+                    if (ctx.board[x][y].missing !== ctx.board[x][y].content) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
     const shadowBlocks = GetMoves(props.board, selected.x, selected.y);
     return (
