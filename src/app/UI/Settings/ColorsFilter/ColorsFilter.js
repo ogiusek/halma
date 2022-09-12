@@ -42,7 +42,6 @@ const ToOrder = (aboutPlayers) => {
     aboutPlayers.map((color) => {
         newOrder.push(pawn[color.color]);
     });
-    console.log(newOrder);
     return newOrder;
 }
 

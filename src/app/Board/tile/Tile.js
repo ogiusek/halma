@@ -17,6 +17,9 @@ function Tile(props) {
     }
     const GetShadow = () => {
         let color = props.element.missing;
+        if (color === 0) {
+            return {};
+        }
         for (let index = 0; index < ctx.order.length; index++) {
             if (color == ctx.order[index]) {
                 color = Object.entries(pawn)[ctx.order[index]][0];
@@ -29,7 +32,6 @@ function Tile(props) {
             BoxShadow: "inset 0px 0px 15px 0px " + color
         };
     }
-
     let pawnElement = <React.Fragment />;
     if (props.element.content != pawn.empty) {
         switch (props.selected) {
@@ -49,7 +51,6 @@ function Tile(props) {
     }
     return (
         <div className={style.wraper + ' ' + ((props.xPos + props.yPos) % 2 == 1 && style.liteWraper) + ' ' + (props.selected && style.selected)} style={GetShadow()}>
-            {/* <Shadow color={"red"} ></Shadow> */}
             {pawnElement}
         </ div >
     );

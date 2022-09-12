@@ -20,7 +20,7 @@ function CreateNewBoard(colors) {
             } else if (x + y >= 26 && x !== 11 && y !== 11) {
                 newBoard[x][y].content = colors[1];
                 newBoard[x][y].missing = colors[0];
-            } else if (colors.length >= 2) {
+            } else if (colors.length > 2) {
                 if (x > 11 && y < 4) {
                     if (!((x === 12 || x === 13) && (y === 3 || y === 2) && !(x !== 12 && y !== 3))) {
                         newBoard[x][y].content = colors[2];
