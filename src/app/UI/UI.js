@@ -17,7 +17,7 @@ function UI(props) {
     }
     const reset = () => {
         Reset('board');
-        ctx.setBoard(CreateNewBoard());
+        ctx.setBoard(CreateNewBoard(ctx.order));
         ctx.setColor(0);
         props.setShowSettings(true);
     }

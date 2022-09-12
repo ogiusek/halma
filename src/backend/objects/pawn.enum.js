@@ -7,9 +7,8 @@ const pawn = {
     magenta: 5,
     blue: 6,
     brown: 7,
-    lightBlue: 8,
-    orange: 9,
-    pink: 10,
-    darkRed: 11
+    orange: 8,
+    pink: 9,
+    darkRed: 10
 };
 export default pawn;

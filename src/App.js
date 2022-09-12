@@ -35,9 +35,9 @@ function App() {
         order: order,
         setOrder: setOrder
       }}>
-        {showSettings && <Settings setShowSettings={setShowSettings} setOrder={setOrder} setEnemys />}
+        {showSettings && <Settings setShowSettings={setShowSettings} setBoard={setBoard} setOrder={setOrder} setEnemys />}
         <div className={style.box}>
-          <Board board={board} />
+          <Board board={board} setBoard={setBoard} />
           <UI board={board} setboard={setBoard} setShowSettings={setShowSettings} />
         </div>
       </AuthContext.Provider>

@@ -1,12 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import style from "./Board.module.css";
 import Tile from "./tile/Tile";
 
 import AuthContext from "../../backend/AuthContext";
 import GetMoves from "../../backend/getMoves";
 import move from "../../backend/move";
-import { SaveMove } from "../../backend/movesHistory";
 import pawn from "../../backend/objects/pawn.enum";
+import { SaveMove } from "../../backend/movesHistory";
 
 function Board(props) {
     const ctx = useContext(AuthContext);
@@ -14,6 +14,9 @@ function Board(props) {
     const select = (value) => {
         setSelected(value);
     }
+    useEffect(() => {
+        setSelected({ x: -1, y: -1 });
+    }, [props.board]);
     const moveFront = (x, y) => {
         ctx.setBoard(move(props.board, selected, { x: x, y: y }));
         SaveMove('board', { from: selected, to: { x: x, y: y } });
@@ -21,23 +24,22 @@ function Board(props) {
         if (color >= ctx.order.length) {
             color = 0;
         }
-        if (ctx.board[x][y].missing === ctx.board[x][y].content) {
+        if (props.board[x][y].missing === props.board[x][y].content) {
             if (checkWin(ctx.color)) {
                 ctx.win();
             }
         }
         ctx.setColor(color);
-        setSelected({ x: -1, y: -1 });
 
     }
     const checkWin = (color) => {
-        for (let x = 0; x < ctx.board.length; x++) {
-            for (let y = 0; y < ctx.board[x].length; y++) {
-                if (ctx.board[x][y].missing === pawn.empty) {
+        for (let x = 0; x < props.board.length; x++) {
+            for (let y = 0; y < props.board[x].length; y++) {
+                if (props.board[x][y].missing === pawn.empty) {
                     continue;
                 }
-                if (ctx.board[x][y].missing === color) {
-                    if (ctx.board[x][y].missing !== ctx.board[x][y].content) {
+                if (props.board[x][y].missing === color) {
+                    if (props.board[x][y].missing !== props.board[x][y].content) {
                         return false;
                     }
                 }

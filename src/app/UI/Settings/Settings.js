@@ -4,6 +4,8 @@ import style from "./Settings.module.css";
 import enemys from "../../../backend/objects/enemy.enum";
 import Select from "./Select";
 import { GetAboutPlayers, ToOrder } from "./ColorsFilter/ColorsFilter";
+import { CreateNewBoard } from "../../../backend/objects/board";
+import pawn from "../../../backend/objects/pawn.enum";
 
 function Settings(props) {
     const [players, setPlayers] = useState(2);
@@ -27,8 +29,8 @@ function Settings(props) {
 
     const confirmSettingsHandler = (event) => {
         event.preventDefault();
-        // console.log(aboutPlayers);
         props.setOrder(ToOrder(aboutPlayers));
+        props.setBoard(CreateNewBoard(aboutPlayers.map(element => { return pawn[element.color] })));
         props.setShowSettings(false);
     }
 
