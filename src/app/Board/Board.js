@@ -7,6 +7,7 @@ import GetMoves from "../../backend/getMoves";
 import move from "../../backend/move";
 import pawn from "../../backend/objects/pawn.enum";
 import { SaveMove } from "../../backend/movesHistory";
+import { colorTurn } from "../../backend/colorTurn";
 
 function Board(props) {
     const ctx = useContext(AuthContext);
@@ -22,7 +23,7 @@ function Board(props) {
         }
         if (props.board[x][y].missing === props.board[x][y].content) {
             if (checkWin(ctx.color)) {
-                ctx.win();
+                ctx.win(ctx.color);
             }
         }
         ctx.setColor(color);

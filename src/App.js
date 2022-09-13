@@ -8,6 +8,7 @@ import pawn from './backend/objects/pawn.enum';
 import { order as orginalOrder } from './backend/colorTurn';
 import firstBoard from './backend/objects/board';
 import Settings from './app/UI/Settings/Settings';
+import WinScreen from './app/UI/WinScreen/WinWindow';
 
 function App() {
   const [order, setOrder] = useState(orginalOrder);
@@ -15,6 +16,7 @@ function App() {
   const [color, setColor] = useState(0);
   const [showSettings, setShowSettings] = useState(true);
   const [selected, setSelected] = useState({ x: -1, y: -1 });
+  const [won, win] = useState(false);
 
   const GetColor = (colorTurn) => {
     let color = Object.entries(pawn);
@@ -34,9 +36,11 @@ function App() {
         color: color,
         setColor: setColor,
         order: order,
-        setOrder: setOrder
+        setOrder: setOrder,
+        win: win,
       }}>
         {showSettings && <Settings setShowSettings={setShowSettings} setBoard={setBoard} setOrder={setOrder} setEnemys />}
+        {won !== false && <WinScreen setShowSettings={setShowSettings} color={won} />}
         <div className={style.box}>
           <Board board={board} setBoard={setBoard} selected={selected} setSelected={setSelected} />
           <UI board={board} setboard={setBoard} setShowSettings={setShowSettings} setSelected={setSelected} />

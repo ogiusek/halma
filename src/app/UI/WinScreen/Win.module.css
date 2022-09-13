@@ -1,0 +1,33 @@
+.main {
+    position: fixed;
+    top: 25vh;
+    left: 25vw;
+    width: 50vw;
+    height: 50vh;
+    background-color: black;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.h1 {
+    color: white;
+    text-align: center;
+    font-size: 2vw;
+    height: 30%;
+    width: 50%;
+}
+
+.button {
+    color: black;
+    background-color: white;
+    transition: 1s;
+    width: 40%;
+    height: 20%;
+}
+
+.button :hover {
+    background-color: wheat;
+}

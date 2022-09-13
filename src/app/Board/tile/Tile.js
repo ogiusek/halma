@@ -18,7 +18,7 @@ function Tile(props) {
         props.move(props.xPos, props.yPos);
     }
     let pawnElement = <React.Fragment />;
-    if (props.element.content != pawn.empty) {
+    if (props.element.content !== pawn.empty) {
         switch (props.selected) {
             case 1:
                 pawnElement = (<div className={style.selected}>
@@ -37,7 +37,6 @@ function Tile(props) {
     let lastMoveFrom = GetLastMove('board');
     const lastMoveTo = lastMoveFrom !== null ? (lastMoveFrom.to.x === props.xPos && lastMoveFrom.to.y === props.yPos) : false;
     lastMoveFrom !== null && (lastMoveFrom = (lastMoveFrom.from.x === props.xPos && lastMoveFrom.from.y === props.yPos));
-    console.log(lastMoveTo);
     return (
         <div className={style.wraper + ' ' +
             ((props.xPos + props.yPos) % 2 === 1 && style.liteWraper) + ' ' +
