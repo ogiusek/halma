@@ -1,6 +1,8 @@
+import enemys from "./objects/enemy.enum";
 import pawn from "./objects/pawn.enum";
 
 let order = [pawn.yellow, pawn.green];
+let enemyOrder = [enemys.player, enemys.player]
 let colorTurn = 0;
 
 const ChangeColor = () => {
@@ -29,5 +31,5 @@ const GetColor = () => {
     return order[colorTurn];
 }
 
-export { order, ChangeColor, SetColor, ReverseColor, ResetColor, colorTurn };
+export { order, enemyOrder, ChangeColor, SetColor, ReverseColor, ResetColor, colorTurn };
 export default GetColor;

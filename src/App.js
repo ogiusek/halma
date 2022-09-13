@@ -12,6 +12,7 @@ import WinScreen from './app/UI/WinScreen/WinWindow';
 
 function App() {
   const [order, setOrder] = useState(orginalOrder);
+  const [enemyOrder, setEnemyOrder] = useState(enemyOrder);
   const [board, setBoard] = useState(firstBoard);
   const [color, setColor] = useState(0);
   const [showSettings, setShowSettings] = useState(true);
@@ -37,9 +38,11 @@ function App() {
         setColor: setColor,
         order: order,
         setOrder: setOrder,
+        enemyOrder: enemyOrder,
+        setEnemyOrder: setEnemyOrder,
         win: win,
       }}>
-        {showSettings && <Settings setShowSettings={setShowSettings} setBoard={setBoard} setOrder={setOrder} setEnemys />}
+        {showSettings && <Settings setShowSettings={setShowSettings} setBoard={setBoard} setOrder={setOrder} setEnemyOrder={setEnemyOrder} />}
         {won !== false && <WinScreen setShowSettings={setShowSettings} color={won} />}
         <div className={style.box}>
           <Board board={board} setBoard={setBoard} selected={selected} setSelected={setSelected} />

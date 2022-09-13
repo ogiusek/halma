@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import style from "./Settings.module.css";
 
 import Select from "./Select";
-import { GetAboutPlayers, ToOrder } from "./ColorsFilter/ColorsFilter";
+import { GetAboutPlayers, ToOrder, ToEnemys } from "./ColorsFilter/ColorsFilter";
 import { CreateNewBoard } from "../../../backend/objects/board";
 import pawn from "../../../backend/objects/pawn.enum";
 
@@ -37,6 +37,7 @@ function Settings(props) {
     const confirmSettingsHandler = (event) => {
         event.preventDefault();
         props.setOrder(ToOrder(aboutPlayers));
+        props.setEnemyOrder(ToEnemys(aboutPlayers));
         props.setBoard(CreateNewBoard(aboutPlayers.map(element => { return pawn[element.color] })));
         props.setShowSettings(false);
     }

@@ -45,4 +45,13 @@ const ToOrder = (aboutPlayers) => {
     return newOrder;
 }
 
-export { FilterColors, GetAboutPlayers, ToOrder };
+const ToEnemys = (aboutPlayers) => {
+    let newOrder = [];
+
+    aboutPlayers.map((enemy) => {
+        newOrder.push(pawn[enemy.enemy]);
+    });
+    return newOrder;
+}
+
+export { FilterColors, GetAboutPlayers, ToOrder, ToEnemys };

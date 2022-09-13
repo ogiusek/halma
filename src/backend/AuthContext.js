@@ -6,6 +6,8 @@ const AuthContext = React.createContext({
     setBoard: undefined,
     setColor: undefined,
     order: undefined,
+    enemyOrder: undefined,
+    setEnemyOrder: undefined,
     setOrder: undefined,
     win: undefined
 });
