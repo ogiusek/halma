@@ -2,16 +2,17 @@ import React, { useContext } from "react";
 import style from "./UI.module.css";
 
 import AuthContext from "../../backend/AuthContext";
-import { GetLastMove, Reset } from "../../backend/movesHistory";
+import { Back, Reset } from "../../backend/movesHistory";
 import move from "../../backend/move";
 import { CreateNewBoard } from "../../backend/objects/board";
 
 function UI(props) {
     const ctx = useContext(AuthContext);
     const back = () => {
-        const lastBoard = GetLastMove('board');
-        if (lastBoard != null) {
+        const lastBoard = Back('board');
+        if (lastBoard !== null) {
             ctx.setBoard(move(ctx.board, lastBoard.to, lastBoard.from));
+            props.setSelected({ x: -1, y: -1 });
             ctx.setColor(ctx.color - 1 < 0 ? ctx.order.length - 1 : ctx.color - 1);
         }
     }

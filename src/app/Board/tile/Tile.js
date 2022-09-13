@@ -4,6 +4,8 @@ import style from "./Tile.module.css";
 import Pawn from "./Pawn/Pawn";
 import pawn from "../../../backend/objects/pawn.enum";
 import AuthContext from "../../../backend/AuthContext";
+import { GetColor, GetShadow } from "./TileCode/TileCode";
+import { GetLastMove } from "../../../backend/movesHistory";
 
 function Tile(props) {
     const ctx = useContext(AuthContext);
@@ -14,23 +16,6 @@ function Tile(props) {
     }
     const move = () => {
         props.move(props.xPos, props.yPos);
-    }
-    const GetShadow = () => {
-        let color = props.element.missing;
-        if (color === 0) {
-            return {};
-        }
-        for (let index = 0; index < ctx.order.length; index++) {
-            if (color == ctx.order[index]) {
-                color = Object.entries(pawn)[ctx.order[index]][0];
-                break;
-            }
-        }
-        return {
-            WebkitBoxShadow: "inset 0px 0px 15px 0px " + color,
-            MozBoxShadow: "inset 0px 0px 15px 0px " + color,
-            BoxShadow: "inset 0px 0px 15px 0px " + color
-        };
     }
     let pawnElement = <React.Fragment />;
     if (props.element.content != pawn.empty) {
@@ -46,11 +31,19 @@ function Tile(props) {
                 </div>);
                 break;
         }
-    } else if (props.selected == 2) {
+    } else if (props.selected === 2) {
         pawnElement = (<div className={style.shadow} onClick={move} />);
     }
+    let lastMoveFrom = GetLastMove('board');
+    const lastMoveTo = lastMoveFrom !== null ? (lastMoveFrom.to.x === props.xPos && lastMoveFrom.to.y === props.yPos) : false;
+    lastMoveFrom !== null && (lastMoveFrom = (lastMoveFrom.from.x === props.xPos && lastMoveFrom.from.y === props.yPos));
+    console.log(lastMoveTo);
     return (
-        <div className={style.wraper + ' ' + ((props.xPos + props.yPos) % 2 == 1 && style.liteWraper) + ' ' + (props.selected && style.selected)} style={GetShadow()}>
+        <div className={style.wraper + ' ' +
+            ((props.xPos + props.yPos) % 2 === 1 && style.liteWraper) + ' ' +
+            ((props.selected || lastMoveFrom) && style.selected) + ' ' +
+            (lastMoveTo === true ? style.shadow : '')}
+            style={GetShadow(GetColor(props, ctx))}>
             {pawnElement}
         </ div >
     );

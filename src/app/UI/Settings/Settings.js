@@ -13,6 +13,7 @@ function Settings(props) {
         setAboutPlayers(GetAboutPlayers(event.target.value));
         setPlayers(event.target.value);
     }
+
     const selectColorRef = (event) => {
         const lastColor = event.target.innerText.split('\n')[0];
         const newColor = event.target.value;
@@ -25,6 +26,7 @@ function Settings(props) {
         }
         setAboutPlayers([...newAboutPlayers.map(element => { return { ...element } })]);
     }
+
     const selectEnemyRef = (event) => {
         const enemyTarget = event.target.value;
         let newAboutPlayers = [...aboutPlayers.map(element => { return { ...element } })];
@@ -38,9 +40,6 @@ function Settings(props) {
         props.setBoard(CreateNewBoard(aboutPlayers.map(element => { return pawn[element.color] })));
         props.setShowSettings(false);
     }
-    if (Number(players) !== 4 && Number(players) !== 2) {
-        console.log(players);
-    }
     return (<form onSubmit={confirmSettingsHandler} className={style.main}>
         <div className={style.inputs}>
             <input type="radio" name="players" value={2} onChange={setPlayersRef} className={style.input} checked={Number(players) === 2} />
@@ -50,7 +49,8 @@ function Settings(props) {
         </div>
         <div className={style.selects}>
             {aboutPlayers.map((element, index) => {
-                return <Select element={element} index={index} players={players} aboutPlayers={aboutPlayers} selectColorRef={selectColorRef} selectEnemyRef={selectEnemyRef} key={"selelect" + index} />
+                return <Select element={element} index={index} players={players} aboutPlayers={aboutPlayers}
+                    selectColorRef={selectColorRef} selectEnemyRef={selectEnemyRef} key={"selelect" + index} />
             })}
         </div>
         <button type="submit" className={style.button}>Play</button>

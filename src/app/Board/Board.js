@@ -10,16 +10,12 @@ import { SaveMove } from "../../backend/movesHistory";
 
 function Board(props) {
     const ctx = useContext(AuthContext);
-    const [selected, setSelected] = useState({ x: -1, y: -1 });
-    const select = (value) => {
-        setSelected(value);
-    }
     useEffect(() => {
-        setSelected({ x: -1, y: -1 });
+        props.setSelected({ x: -1, y: -1 });
     }, [props.board]);
     const moveFront = (x, y) => {
-        ctx.setBoard(move(props.board, selected, { x: x, y: y }));
-        SaveMove('board', { from: selected, to: { x: x, y: y } });
+        ctx.setBoard(move(props.board, props.selected, { x: x, y: y }));
+        SaveMove('board', { from: props.selected, to: { x: x, y: y } });
         let color = ctx.color + 1;
         if (color >= ctx.order.length) {
             color = 0;
@@ -47,7 +43,7 @@ function Board(props) {
         }
         return true;
     }
-    const shadowBlocks = GetMoves(props.board, selected.x, selected.y);
+    const shadowBlocks = GetMoves(props.board, props.selected.x, props.selected.y);
     return (
         <div className={style.board}>
             {
@@ -56,17 +52,17 @@ function Board(props) {
                         {elements.map((element, indey) => {
                             let selectedToTile;
                             for (let index = 0; index < shadowBlocks.length; index++) {
-                                if (shadowBlocks[index].x == element.x && shadowBlocks[index].y == element.y) {
+                                if (shadowBlocks[index].x === element.x && shadowBlocks[index].y === element.y) {
                                     selectedToTile = 2;
                                     break;
                                 }
                             }
-                            if (selectedToTile == undefined) {
-                                selectedToTile = selected.x == element.x && selected.y == element.y ? 1 : 0;
+                            if (selectedToTile === undefined) {
+                                selectedToTile = props.selected.x === element.x && props.selected.y === element.y ? 1 : 0;
                             }
                             return (
                                 <Tile xPos={element.x} yPos={element.y}
-                                    selected={selectedToTile} select={select}
+                                    selected={selectedToTile} select={props.setSelected}
                                     move={moveFront}
                                     element={element}
                                     key={indey + ''} />
