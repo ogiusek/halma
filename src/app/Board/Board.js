@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import style from "./Board.module.css";
 import Tile from "./tile/Tile";
 
@@ -35,7 +35,7 @@ function Board(props) {
                 if (props.board[x][y].missing === pawn.empty) {
                     continue;
                 }
-                if (props.board[x][y].missing === color) {
+                if (props.board[x][y].missing === Object.entries(pawn)[ctx.order[color]][0]) {
                     if (props.board[x][y].missing !== props.board[x][y].content) {
                         return false;
                     }

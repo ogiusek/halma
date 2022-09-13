@@ -5,14 +5,14 @@ import Board from './app/Board/Board';
 
 import AuthContext from './backend/AuthContext';
 import pawn from './backend/objects/pawn.enum';
-import { order as orginalOrder } from './backend/colorTurn';
+import { order as orginalOrder, enemyOrder as orginalEnemyOrder } from './backend/colorTurn';
 import firstBoard from './backend/objects/board';
 import Settings from './app/UI/Settings/Settings';
 import WinScreen from './app/UI/WinScreen/WinWindow';
 
 function App() {
   const [order, setOrder] = useState(orginalOrder);
-  const [enemyOrder, setEnemyOrder] = useState(enemyOrder);
+  const [enemyOrder, setEnemyOrder] = useState(orginalEnemyOrder);
   const [board, setBoard] = useState(firstBoard);
   const [color, setColor] = useState(0);
   const [showSettings, setShowSettings] = useState(true);
