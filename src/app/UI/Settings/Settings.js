@@ -28,9 +28,9 @@ function Settings(props) {
     }
 
     const selectEnemyRef = (event) => {
-        const enemyTarget = event.target.value;
+        const enemyTarget = event.target.value.split(',');
         let newAboutPlayers = [...aboutPlayers.map(element => { return { ...element } })];
-        newAboutPlayers[enemyTarget[0]].enemy = enemyTarget[1];
+        newAboutPlayers[enemyTarget[0]].enemy = Number(enemyTarget[1]);
         setAboutPlayers([...newAboutPlayers.map(element => { return { ...element } })]);
     }
 

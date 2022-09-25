@@ -29,7 +29,7 @@ const Select = (props) => {
         </select >
         <select className={style.select} style={{ backgroundColor: 'black', color: "white" }} onChange={props.selectEnemyRef}>
             {Object.entries(enemys).map((element, index) => {
-                return (<option key={'enemys' + element[1]} value={[index, element[0]]}>{element[0]}</option>);
+                return (<option key={'enemys' + element[1]} value={[props.index, element[1]]}>{element[0]}</option>);
             })}
         </select>
     </div >);

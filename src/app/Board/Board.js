@@ -7,27 +7,44 @@ import GetMoves from "../../backend/getMoves";
 import move from "../../backend/move";
 import pawn from "../../backend/objects/pawn.enum";
 import { SaveMove } from "../../backend/movesHistory";
-import { colorTurn } from "../../backend/colorTurn";
+import enemys from "../../backend/objects/enemy.enum";
+import { Easy, Normal, Hard } from "../../backend/enemys/enemysList";
 
 function Board(props) {
     const ctx = useContext(AuthContext);
-    useEffect(() => {
-        props.setSelected({ x: -1, y: -1 });
-    }, [props.board]);
-    const moveFront = (x, y) => {
-        ctx.setBoard(move(props.board, props.selected, { x: x, y: y }));
-        SaveMove('board', { from: props.selected, to: { x: x, y: y } });
+    const aiCheck = (color) => {
+        let move;
+        switch (ctx.enemyOrder[color]) {
+            case enemys.easy:
+                move = Easy(props.board, ctx.order, color);
+                break;
+            case enemys.normal:
+                move = Normal(props.board, ctx.order, color);
+                break;
+            case enemys.hard:
+                move = Hard(props.board, ctx.order, color);
+                break;
+            default:
+                return;
+        }
+        moveFront(move.to.x, move.to.y, move.from);
+    }
+    const moveFront = (x, y, from) => {
+        let nFrom = from === undefined ? props.selected : from;
+        ctx.setBoard(move(props.board, nFrom, { x: x, y: y }));
+        setTimeout(() => {
+            SaveMove('board', { from: nFrom, to: { x: x, y: y } });
+        }, 5);
         let color = ctx.color + 1;
         if (color >= ctx.order.length) {
             color = 0;
         }
+        ctx.setColor(color);
         if (props.board[x][y].missing === props.board[x][y].content) {
             if (checkWin(ctx.color)) {
                 ctx.win(ctx.color);
             }
         }
-        ctx.setColor(color);
-
     }
     const checkWin = (color) => {
         for (let x = 0; x < props.board.length; x++) {
@@ -45,6 +62,12 @@ function Board(props) {
         return true;
     }
     const shadowBlocks = GetMoves(props.board, props.selected.x, props.selected.y);
+    useEffect(() => {
+        props.setSelected({ x: -1, y: -1 });
+    }, [props.board]);
+    useEffect(() => {
+        aiCheck(ctx.color);
+    }, [ctx.color]);
     return (
         <div className={style.board}>
             {

@@ -47,9 +47,8 @@ const ToOrder = (aboutPlayers) => {
 
 const ToEnemys = (aboutPlayers) => {
     let newOrder = [];
-
     aboutPlayers.map((enemy) => {
-        newOrder.push(pawn[enemy.enemy]);
+        newOrder.push(enemy.enemy);
     });
     return newOrder;
 }
