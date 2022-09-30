@@ -9,6 +9,7 @@ import { order as orginalOrder, enemyOrder as orginalEnemyOrder } from './backen
 import firstBoard from './backend/objects/board';
 import Settings from './app/UI/Settings/Settings';
 import WinScreen from './app/UI/WinScreen/WinWindow';
+import enemys from './backend/objects/enemy.enum';
 
 function App() {
   const [order, setOrder] = useState(orginalOrder);
@@ -16,9 +17,13 @@ function App() {
   const [board, setBoard] = useState(firstBoard);
   const [color, setColor] = useState(0);
   const [showSettings, setShowSettings] = useState(true);
-  const [selected, setSelected] = useState({ x: -1, y: -1 });
+  const [selected, clearSetSelected] = useState({ x: -1, y: -1 });
   const [won, win] = useState(false);
-
+  const setSelected = (value) => {
+    if (value.x == -1 || enemyOrder[color] === enemys.player) {
+      clearSetSelected(value);
+    }
+  }
   const GetColor = (colorTurn) => {
     let color = Object.entries(pawn);
     for (let index = 0; index < order.length; index++) {
@@ -41,6 +46,7 @@ function App() {
         enemyOrder: enemyOrder,
         setEnemyOrder: setEnemyOrder,
         win: win,
+        won: won || showSettings
       }}>
         {showSettings && <Settings setShowSettings={setShowSettings} setBoard={setBoard} setOrder={setOrder} setEnemyOrder={setEnemyOrder} />}
         {won !== false && <WinScreen setShowSettings={setShowSettings} color={won} />}

@@ -9,7 +9,8 @@ const AuthContext = React.createContext({
     enemyOrder: undefined,
     setEnemyOrder: undefined,
     setOrder: undefined,
-    win: undefined
+    win: undefined,
+    won: undefined
 });
 
 export default AuthContext;

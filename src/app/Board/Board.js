@@ -30,6 +30,9 @@ function Board(props) {
         moveFront(move.to.x, move.to.y, move.from);
     }
     const moveFront = (x, y, from) => {
+        if (ctx.won) {
+            return;
+        }
         let nFrom = from === undefined ? props.selected : from;
         ctx.setBoard(move(props.board, nFrom, { x: x, y: y }));
         setTimeout(() => {
@@ -64,6 +67,7 @@ function Board(props) {
     const shadowBlocks = GetMoves(props.board, props.selected.x, props.selected.y);
     useEffect(() => {
         props.setSelected({ x: -1, y: -1 });
+        aiCheck(ctx.color);
     }, [props.board]);
     useEffect(() => {
         aiCheck(ctx.color);
